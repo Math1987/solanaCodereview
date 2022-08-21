@@ -1,0 +1,25 @@
+Problem to solve:
+When multiple players enter in the same room (actualy, this is the client who give to the smart-contract the game's room Account address),
+some of them can fail to enter because the room will be full.
+
+the goal is to give to the smart-contract the role to place the player in a game instead of sending the game Account address by the client.
+For that, we have a list of game Account Pubkeys, initialized by the server, containing all the actives games (actualy not finish, 
+    and in a next update a list of games who are not full) (lib.rs line 354)
+    => the server create an amount of new empty games, and store each of them in a list (lib.rs line 27)
+
+This is from this list that the smart-contract should load the game Account and place the player inside.
+If an error occur, then the smart-contract can fetch the next game Account in the list and try again.
+
+Then a player who pay a transaction to enter in a game should not see transaction fail, 
+because the smart-contract sould be sure to place it, without of course if not enought games are in the list.
+
+
+
+The function to update is:
+Add a player in a game (function add_player line 45):
+
+We should remove the game Account (lib.rs line 316, 317):
+#[account(mut)]
+pub game : Account<'info, Game>
+
+And get the game in the function add_player with the list (the game_list Account can be sent by the client)

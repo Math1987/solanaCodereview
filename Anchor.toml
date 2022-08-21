@@ -1,0 +1,20 @@
+[features]
+seeds = false
+[programs.localnet]
+anchor = "86Cv87ngyvdDzwYc6qaAyCjrRobhPapUQ2oWexf1rrcY"
+
+[programs.devnet]
+anchor = "86Cv87ngyvdDzwYc6qaAyCjrRobhPapUQ2oWexf1rrcY"
+
+[programs.mainnet]
+anchor = "86Cv87ngyvdDzwYc6qaAyCjrRobhPapUQ2oWexf1rrcY"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "localnet"
+wallet = "/Users/mathieucolla/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
